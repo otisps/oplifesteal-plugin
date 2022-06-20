@@ -1,7 +1,6 @@
 package me.otisps.oplifesteal.listeners;
 
-import me.otisps.oplifesteal.events.PlayerMurderEvent;
-import me.otisps.oplifesteal.items.BookGenerator;
+import me.otisps.oplifesteal.events.PlayerKillEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +14,6 @@ public class DeathListeners implements Listener {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         if(killer == (null)) return;
-        Bukkit.getServer().getPluginManager().callEvent(new PlayerMurderEvent(victim, killer));
+        Bukkit.getServer().getPluginManager().callEvent(new PlayerKillEvent(victim, killer));
     }
 }

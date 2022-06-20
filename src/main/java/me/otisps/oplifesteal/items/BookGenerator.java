@@ -11,6 +11,7 @@ public class BookGenerator {
 
     /**
      * Generates a Random Enchant that is naturally not obtainable.
+     * 40% of the time it is 2 enchants higher than possible...
      * @return Enchantment book with "illegal" enchant
      */
     public ItemStack getOPBook(){

@@ -5,12 +5,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * Only is called when a player is murdered
+ * Event which contains the victim and killer for a player kill event.
  */
-public class PlayerMurderEvent extends Event {
+public class PlayerKillEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-
     private Player victim;
     private Player killer;
 
@@ -22,7 +21,7 @@ public class PlayerMurderEvent extends Event {
         return killer;
     }
 
-    public PlayerMurderEvent(Player victim, Player killer){
+    public PlayerKillEvent(Player victim, Player killer){
         this.killer = killer;
         this.victim = victim;
     }
