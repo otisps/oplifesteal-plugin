@@ -15,8 +15,5 @@ public class MurderListeners implements Listener {
         killer.getInventory().addItem(bookFactory.getOPBook());
     }
 
-    @EventHandler
-    public void onMurderLifeSteal(){
 
-    }
 }
