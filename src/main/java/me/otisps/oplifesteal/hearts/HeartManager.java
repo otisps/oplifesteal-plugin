@@ -60,11 +60,16 @@ public class HeartManager {
     }
 
 
-    public void addToSpectate(Player player){
-        Oplifesteal.getInstance().getDataFileConfig().set("spectate." + player.getUniqueId().toString(), true);
+    public void addToSpectate(Player player) throws IOException {
+        setMaxHearts(player, 0);
         player.spigot().respawn();
         player.setGameMode(GameMode.SPECTATOR);
         player.sendMessage("You had all your hearts stolen!");
     }
 
+    public void revive(Player player) throws IOException {
+        player.setHealth(20);
+        player.setGameMode(GameMode.SURVIVAL);
+        setMaxHearts(player, 20);
+    }
 }

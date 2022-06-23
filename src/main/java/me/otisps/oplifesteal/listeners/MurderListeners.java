@@ -24,7 +24,11 @@ public class MurderListeners implements Listener {
         Player victim = event.getVictim();
         Player killer = event.getKiller();
         if (lifeSteal.getMaxHearts(victim) <= 2){
-            lifeSteal.addToSpectate(victim);
+            try {
+                lifeSteal.addToSpectate(victim);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             killer.sendMessage("Victim doesn't have any hearts left to steal!");
             return;
         }
