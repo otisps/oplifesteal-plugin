@@ -1,7 +1,7 @@
 package me.otisps.oplifesteal.hearts;
 
 import me.otisps.oplifesteal.Oplifesteal;
-import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -9,6 +9,22 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class HeartManager {
+
+    /**
+     * Steal Heart from player
+     * @param player target
+     */
+        public void stealHeart(Player player) throws IOException {
+            setMaxHearts(player, getMaxHearts(player) - 2);
+        }
+
+    /**
+     * Add heart to player
+     * @param player target
+     */
+    public void addHeart(Player player) throws IOException {
+            setMaxHearts(player, getMaxHearts(player) + 2);
+        }
     /**
      * Gets the maximum amount of hearts from the data file of a particular player
      * @param player target
@@ -28,7 +44,7 @@ public class HeartManager {
      */
     public boolean saveMaxHearts(UUID uuid, int upperBound) throws IOException {
         FileConfiguration dataFileConfig = Oplifesteal.getInstance().getDataFileConfig();
-        dataFileConfig.set("hearts." + Bukkit.getPlayer(uuid).toString(), upperBound);
+        dataFileConfig.set("hearts." + uuid.toString(), upperBound);
         Oplifesteal.getInstance().saveDataFile(dataFileConfig);
         return true;
     }
@@ -44,5 +60,11 @@ public class HeartManager {
     }
 
 
+    public void addToSpectate(Player player){
+        Oplifesteal.getInstance().getDataFileConfig().set("spectate." + player.getUniqueId().toString(), true);
+        player.spigot().respawn();
+        player.setGameMode(GameMode.SPECTATOR);
+        player.sendMessage("You had all your hearts stolen!");
+    }
 
 }

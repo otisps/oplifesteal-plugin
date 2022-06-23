@@ -1,11 +1,14 @@
 package me.otisps.oplifesteal;
 
+import me.otisps.oplifesteal.crafting.Recipes;
 import me.otisps.oplifesteal.listeners.DeathListeners;
 import me.otisps.oplifesteal.listeners.JoinListener;
 import me.otisps.oplifesteal.listeners.MurderListeners;
+import me.otisps.oplifesteal.listeners.PlayerInteractListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -20,13 +23,19 @@ public final class Oplifesteal extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        this.instance = this;
         this.getLogger().info("Plugin has been enabled.");
         Bukkit.getServer().getPluginManager().registerEvents(new DeathListeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new MurderListeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
+
         this.saveDefaultConfig();
         createDataFile();
-        this.instance = this;
+
+        Recipes recipe = new Recipes();
+        recipe.addHeart();
+        recipe.addBeacon();
     }
 
     @Override

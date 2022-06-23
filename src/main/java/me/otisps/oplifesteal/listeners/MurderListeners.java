@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 
 import java.io.IOException;
 
-
 public class MurderListeners implements Listener {
 
     @EventHandler
@@ -24,11 +23,19 @@ public class MurderListeners implements Listener {
         HeartManager lifeSteal = new HeartManager();
         Player victim = event.getVictim();
         Player killer = event.getKiller();
+        if (lifeSteal.getMaxHearts(victim) <= 2){
+            lifeSteal.addToSpectate(victim);
+            killer.sendMessage("Victim doesn't have any hearts left to steal!");
+            return;
+        }
         try {
-            lifeSteal.setMaxHearts(victim, (lifeSteal.getMaxHearts(victim) + 1));
-            lifeSteal.setMaxHearts(killer, (lifeSteal.getMaxHearts(killer) - 1));
+            lifeSteal.stealHeart(victim);
+            lifeSteal.addHeart(killer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        victim.sendMessage("You had a heart stolen from " + killer.getDisplayName());
+        killer.sendMessage("You stole a heart from " + victim.getDisplayName());
     }
 }
