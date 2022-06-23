@@ -1,5 +1,6 @@
 package me.otisps.oplifesteal;
 
+import me.otisps.oplifesteal.commands.WithdrawCommand;
 import me.otisps.oplifesteal.crafting.Recipes;
 import me.otisps.oplifesteal.listeners.*;
 import org.bukkit.Bukkit;
@@ -29,6 +30,8 @@ public final class Oplifesteal extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockListener(), this);
         this.saveDefaultConfig();
         createDataFile();
+
+        this.getCommand("withdraw").setExecutor(new WithdrawCommand());
 
         Recipes recipe = new Recipes();
         recipe.addHeart();

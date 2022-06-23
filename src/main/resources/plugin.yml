@@ -4,3 +4,7 @@ main: me.otisps.oplifesteal.Oplifesteal
 api-version: 1.18
 authors: [ otisps ]
 description: OP Enchanting Books dropped on death. Lifesteal. Player abolishment. Beacon revive.  Custom Crafting.
+commands:
+  withdraw:
+    description: withdraw a single heart from balance
+    usage: /withdraw
