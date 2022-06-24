@@ -32,6 +32,7 @@ public class WithdrawCommand implements CommandExecutor {
                 LifestealGenerator lifestealGenerator = new LifestealGenerator();
                 ItemStack customHeart = lifestealGenerator.getLifeHeart();
                 player.getInventory().addItem(customHeart);
+                player.sendMessage("Heart withdrawn.");
             }
         }
         return true;

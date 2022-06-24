@@ -1,6 +1,8 @@
 package me.otisps.oplifesteal.utils;
 
+import me.otisps.oplifesteal.Oplifesteal;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

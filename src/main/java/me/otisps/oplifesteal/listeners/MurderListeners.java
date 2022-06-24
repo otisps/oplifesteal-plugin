@@ -30,6 +30,7 @@ public class MurderListeners implements Listener {
                 victim.sendMessage(ChatUtils.hexFormat("You had all your hearts stolen and must now spectate!"));
                 lifeSteal.addHeart(killer);
                 killer.sendMessage(ChatUtils.hexFormat("You stole a heart from " + victim.getDisplayName()));
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
