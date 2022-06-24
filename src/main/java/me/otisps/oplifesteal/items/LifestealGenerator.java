@@ -12,7 +12,7 @@ public class LifestealGenerator {
     public ItemStack getLifeHeart(){
         ItemStack customHeart = new ItemStack(Material.MOOSHROOM_SPAWN_EGG);
         ItemMeta heartMeta = customHeart.getItemMeta();
-        heartMeta.setDisplayName(ChatUtils.hexFormat("&fPlayer Heart"));
+        heartMeta.setDisplayName(ChatUtils.hexFormat("&rPlayer Heart"));
         customHeart.setItemMeta(heartMeta);
         return customHeart;
     }
@@ -20,8 +20,8 @@ public class LifestealGenerator {
     public ItemStack getReviveBeacon(){
         ItemStack customBeacon = new ItemStack(Material.BEACON);
         ItemMeta beaconMeta = customBeacon.getItemMeta();
-        beaconMeta.setLore(Collections.singletonList(ChatUtils.hexFormat("&fRename me before placing!")));
-        beaconMeta.setDisplayName(ChatUtils.hexFormat("&fRevive Beacon"));
+        beaconMeta.setLore(Collections.singletonList(ChatUtils.hexFormat("&rRename me before placing!")));
+        beaconMeta.setDisplayName(ChatUtils.hexFormat("&rRevive Beacon"));
         customBeacon.setItemMeta(beaconMeta);
         return customBeacon;
     }
