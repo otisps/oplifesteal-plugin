@@ -1,6 +1,5 @@
 package me.otisps.oplifesteal.items;
 
-import me.otisps.oplifesteal.Oplifesteal;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

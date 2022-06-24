@@ -13,7 +13,6 @@ public class DeathListeners implements Listener {
     public void onDeathEvent(PlayerDeathEvent event){
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
-        killer.sendMessage("success");
         if(killer == (null)) return;
         Bukkit.getServer().getPluginManager().callEvent(new PlayerKillEvent(victim, killer));
     }

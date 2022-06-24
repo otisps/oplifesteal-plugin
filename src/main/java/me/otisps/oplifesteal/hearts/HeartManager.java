@@ -1,6 +1,7 @@
 package me.otisps.oplifesteal.hearts;
 
 import me.otisps.oplifesteal.Oplifesteal;
+import me.otisps.oplifesteal.utils.ChatUtils;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -54,7 +55,9 @@ public class HeartManager {
      * @param player target
      */
     public void setMaxHearts(Player player, int heartsScale) throws IOException {
-        player.setHealthScale(heartsScale);
+        if(heartsScale > 1){
+            player.setHealthScale(heartsScale);
+        }
         UUID playerId = player.getUniqueId();
         saveMaxHearts(playerId, heartsScale);
     }
@@ -64,7 +67,7 @@ public class HeartManager {
         setMaxHearts(player, 0);
         player.spigot().respawn();
         player.setGameMode(GameMode.SPECTATOR);
-        player.sendMessage("You had all your hearts stolen!");
+        player.sendMessage(ChatUtils.hexFormat("You had all your hearts stolen!"));
     }
 
     public void revive(Player player) throws IOException {

@@ -3,6 +3,7 @@ package me.otisps.oplifesteal.listeners;
 import me.otisps.oplifesteal.events.PlayerKillEvent;
 import me.otisps.oplifesteal.hearts.HeartManager;
 import me.otisps.oplifesteal.items.BookGenerator;
+import me.otisps.oplifesteal.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +30,7 @@ public class MurderListeners implements Listener {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            killer.sendMessage("Victim doesn't have any hearts left to steal!");
+            killer.sendMessage(ChatUtils.hexFormat("Victim doesn't have any hearts left to steal!"));
             return;
         }
         try {
@@ -39,7 +40,7 @@ public class MurderListeners implements Listener {
             throw new RuntimeException(e);
         }
 
-        victim.sendMessage("You had a heart stolen from " + killer.getDisplayName());
-        killer.sendMessage("You stole a heart from " + victim.getDisplayName());
+        victim.sendMessage(ChatUtils.hexFormat("You had a heart stolen from " + killer.getDisplayName()));
+        killer.sendMessage(ChatUtils.hexFormat("You stole a heart from " + victim.getDisplayName()));
     }
 }

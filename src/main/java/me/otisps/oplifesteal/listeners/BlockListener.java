@@ -1,13 +1,12 @@
 package me.otisps.oplifesteal.listeners;
 
 import me.otisps.oplifesteal.hearts.HeartManager;
+import me.otisps.oplifesteal.utils.ChatUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -18,7 +17,7 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockPlaceEvent event){
         if(!event.getBlock().getType().equals(Material.BEACON)) return;
-        event.getItemInHand().getItemMeta().getLore().contains("Rename me before placing!");
+        event.getItemInHand().getItemMeta().getLore().contains(ChatUtils.hexFormat("Rename me before placing!"));
         event.setCancelled(true);
         String name = event.getItemInHand().getItemMeta().getDisplayName();
         for (Player p: Bukkit.getOnlinePlayers()) {
@@ -39,8 +38,8 @@ public class BlockListener implements Listener {
                     event.getBlock().setType(Material.FIRE);
                     p.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 20, 1 );
                     event.getPlayer().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 20, 1);
-                    p.sendMessage("You were revived!");
-                    event.getPlayer().sendMessage("Player was revived!");
+                    p.sendMessage(ChatUtils.hexFormat("You were revived!"));
+                    event.getPlayer().sendMessage(ChatUtils.hexFormat("Player was revived!"));
                 }
             }
         }
