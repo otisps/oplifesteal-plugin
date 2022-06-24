@@ -27,6 +27,7 @@ public class MurderListeners implements Listener {
         if (lifeSteal.getMaxHearts(victim) <= 2){
             try {
                 lifeSteal.addToSpectate(victim);
+                victim.sendMessage(ChatUtils.hexFormat("You had all your hearts stolen!"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
