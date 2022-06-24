@@ -27,12 +27,12 @@ public class MurderListeners implements Listener {
         if (lifeSteal.getMaxHearts(victim) <= 2){
             try {
                 lifeSteal.addToSpectate(victim);
-                victim.sendMessage(ChatUtils.hexFormat("You had all your hearts stolen!"));
+                victim.sendMessage(ChatUtils.hexFormat("You had all your hearts stolen and must now spectate!"));
+                lifeSteal.addHeart(killer);
+                killer.sendMessage(ChatUtils.hexFormat("You stole a heart from " + victim.getDisplayName()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            killer.sendMessage(ChatUtils.hexFormat("Victim doesn't have any hearts left to steal!"));
-            return;
         }
         try {
             lifeSteal.stealHeart(victim);

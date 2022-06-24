@@ -17,10 +17,13 @@ public class WithdrawCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length > 0 ) return true;
-
         if(sender instanceof Player){
             Player player = ((Player) sender);
             if(player.getGameMode().equals(GameMode.SURVIVAL)){
+                if(player.getHealthScale() <= 2){
+                    player.sendMessage(ChatUtils.hexFormat("You don't have any hearts to withdraw!"));
+                    return true;
+                }
                 HeartManager lifesteal = new HeartManager();
                 try {
                     lifesteal.stealHeart(player);
