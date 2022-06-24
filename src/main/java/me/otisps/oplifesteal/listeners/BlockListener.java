@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -33,13 +34,13 @@ public class BlockListener implements Listener {
                     Location location = event.getBlock().getLocation();
                     location.setY(location.getBlockY() + 2);
                     p.teleport(location);
-                    PotionEffect levitate = new PotionEffect(PotionEffectType.LEVITATION, 2, 2);
+                    PotionEffect levitate = new PotionEffect(PotionEffectType.LEVITATION, 5, 3);
                     p.addPotionEffect(levitate);
-                    event.getBlock().setType(Material.FIRE);
-                    p.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 20, 1 );
-                    event.getPlayer().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 20, 1);
+                    location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 200, 1 );
                     p.sendMessage(ChatUtils.hexFormat("You were revived!"));
+                    location.getWorld().spawnParticle(Particle.HEART, location, 20, 1 );
                     event.getPlayer().sendMessage(ChatUtils.hexFormat("Player was revived!"));
+                    event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                 }
             }
         }
