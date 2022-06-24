@@ -12,7 +12,8 @@ public class FileManager {
     private FileConfiguration dataFileConfig;
 
     public FileConfiguration getDataFileConfig() {
-        return dataFileConfig;
+        createDataFile();
+        return this.dataFileConfig;
     }
 
     public void createDataFile() {
@@ -22,8 +23,8 @@ public class FileManager {
             Oplifesteal.getInstance().saveResource("data.yml", false);
         }
 
-        dataFileConfig = new YamlConfiguration();
-        dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
+        this.dataFileConfig = new YamlConfiguration();
+        this.dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
 
     }
 
