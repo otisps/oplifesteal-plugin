@@ -21,10 +21,6 @@ public class WithdrawCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = ((Player) sender);
             if(player.getGameMode().equals(GameMode.SURVIVAL)){
-                if(!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-                    player.sendMessage(ChatUtils.hexFormat("Make sure you aren't holding anything!"));
-                    return true;
-                }
                 HeartManager lifesteal = new HeartManager();
                 try {
                     lifesteal.stealHeart(player);
@@ -33,7 +29,7 @@ public class WithdrawCommand implements CommandExecutor {
                 }
                 LifestealGenerator lifestealGenerator = new LifestealGenerator();
                 ItemStack customHeart = lifestealGenerator.getLifeHeart();
-                player.getInventory().setItemInMainHand(customHeart);
+                player.getInventory().addItem(customHeart);
             }
         }
         return true;
