@@ -18,8 +18,8 @@ public class PlayerInteractListener implements Listener {
         if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)){
             PlayerInventory inventory = event.getPlayer().getInventory();
             ItemStack itemInMainHand = inventory.getItemInMainHand();
-
             if(itemInMainHand.getType().equals(Material.MOOSHROOM_SPAWN_EGG)){
+                event.setCancelled(true);
                 int stackSize = itemInMainHand.getAmount();
                 if(stackSize > 1){
                     itemInMainHand.setAmount(stackSize-1);
