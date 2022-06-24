@@ -34,11 +34,10 @@ public class BlockListener implements Listener {
                     Location location = event.getBlock().getLocation();
                     location.setY(location.getBlockY() + 2);
                     p.teleport(location);
-                    PotionEffect levitate = new PotionEffect(PotionEffectType.LEVITATION, 5, 3);
+                    PotionEffect levitate = new PotionEffect(PotionEffectType.LEVITATION, 5, 4);
                     p.addPotionEffect(levitate);
                     location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 200, 1 );
                     p.sendMessage(ChatUtils.hexFormat("You were revived!"));
-                    location.getWorld().spawnParticle(Particle.HEART, location, 20, 1 );
                     event.getPlayer().sendMessage(ChatUtils.hexFormat("Player was revived!"));
                     event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                 }

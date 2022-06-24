@@ -4,7 +4,6 @@ import me.otisps.oplifesteal.hearts.HeartManager;
 import me.otisps.oplifesteal.items.LifestealGenerator;
 import me.otisps.oplifesteal.utils.ChatUtils;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
