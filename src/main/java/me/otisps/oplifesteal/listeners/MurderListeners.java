@@ -23,6 +23,7 @@ public class MurderListeners implements Listener {
     public void onMurderLifeSteal(PlayerKillEvent event){
         HeartManager lifeSteal = new HeartManager();
         Player victim = event.getVictim();
+        victim.getInventory().clear();
         Player killer = event.getKiller();
         if (lifeSteal.getMaxHearts(victim) <= 2){
             try {
@@ -37,11 +38,14 @@ public class MurderListeners implements Listener {
         }
         try {
             lifeSteal.stealHeart(victim);
+            if(lifeSteal.getMaxHearts(killer) >= 40){
+                killer.sendMessage("You can't gain any more hearts, you're at the max!");
+                return;
+            }
             lifeSteal.addHeart(killer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         victim.sendMessage(ChatUtils.hexFormat("You had a heart stolen from " + killer.getDisplayName()));
         killer.sendMessage(ChatUtils.hexFormat("You stole a heart from " + victim.getDisplayName()));
     }

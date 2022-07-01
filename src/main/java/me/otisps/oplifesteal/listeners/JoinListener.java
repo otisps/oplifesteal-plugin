@@ -15,13 +15,18 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent event){
         Player player = event.getPlayer();
+        player.setHealthScale(20);
         FileManager fileManager = new FileManager();
+        HeartManager lifeSteal = new HeartManager();
         FileConfiguration data = fileManager.getDataFileConfig();
         if (data.contains("hearts." + player.getUniqueId().toString())) {
-            player.setHealthScale(data.getInt("hearts." + player.getUniqueId().toString() ));
+            try {
+                lifeSteal.setMaxHearts(player, data.getDouble("hearts." + player.getUniqueId().toString()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return;
         }
-        HeartManager lifeSteal = new HeartManager();
         try {
             lifeSteal.saveMaxHearts(player.getUniqueId(), 20);
         } catch (IOException e) {

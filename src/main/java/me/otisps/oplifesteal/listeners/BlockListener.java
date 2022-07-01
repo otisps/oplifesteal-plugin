@@ -24,7 +24,6 @@ public class BlockListener implements Listener {
         for (Player p: Bukkit.getOnlinePlayers()) {
             if(p.getDisplayName().equalsIgnoreCase(name)){
                 if(p.getGameMode().equals(GameMode.SPECTATOR)){
-                    p.setHealth(20);
                     HeartManager heartManager = new HeartManager();
                     try {
                         heartManager.revive(p);

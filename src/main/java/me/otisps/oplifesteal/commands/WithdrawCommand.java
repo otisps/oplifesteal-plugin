@@ -4,6 +4,7 @@ import me.otisps.oplifesteal.hearts.HeartManager;
 import me.otisps.oplifesteal.items.LifestealGenerator;
 import me.otisps.oplifesteal.utils.ChatUtils;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +20,7 @@ public class WithdrawCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = ((Player) sender);
             if(player.getGameMode().equals(GameMode.SURVIVAL)){
-                if(player.getHealthScale() <= 2){
+                if(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() <= 2){
                     player.sendMessage(ChatUtils.hexFormat("You don't have any hearts to withdraw!"));
                     return true;
                 }

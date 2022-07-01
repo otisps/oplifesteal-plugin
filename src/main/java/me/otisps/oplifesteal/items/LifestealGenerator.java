@@ -10,7 +10,7 @@ import java.util.Collections;
 public class LifestealGenerator {
 
     public ItemStack getLifeHeart(){
-        ItemStack customHeart = new ItemStack(Material.MOOSHROOM_SPAWN_EGG);
+        ItemStack customHeart = new ItemStack(Material.BARRIER);
         ItemMeta heartMeta = customHeart.getItemMeta();
         heartMeta.setDisplayName(ChatUtils.hexFormat("&rPlayer Heart"));
         customHeart.setItemMeta(heartMeta);

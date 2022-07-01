@@ -18,17 +18,22 @@ public class PlayerInteractListener implements Listener {
         if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)){
             PlayerInventory inventory = event.getPlayer().getInventory();
             ItemStack itemInMainHand = inventory.getItemInMainHand();
-            if(itemInMainHand.getType().equals(Material.MOOSHROOM_SPAWN_EGG)){
+            if(itemInMainHand.getType().equals(Material.BARRIER)){
                 event.setCancelled(true);
+                HeartManager heartManager = new HeartManager();
+                if(heartManager.getMaxHearts(event.getPlayer()) >= 40) {
+                    event.getPlayer().sendMessage("You are at the maximum amount of hearts!");
+                    return;
+                }
                 int stackSize = itemInMainHand.getAmount();
                 if(stackSize > 1){
                     itemInMainHand.setAmount(stackSize-1);
                 } else {
                     inventory.setItemInMainHand(new ItemStack(Material.AIR));
                 }
-                HeartManager heartManager = new HeartManager();
                 try {
                     heartManager.addHeart(event.getPlayer());
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

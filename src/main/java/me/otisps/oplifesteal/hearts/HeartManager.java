@@ -2,6 +2,7 @@ package me.otisps.oplifesteal.hearts;
 
 import me.otisps.oplifesteal.data.FileManager;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -15,7 +16,8 @@ public class HeartManager {
      * @param player target
      */
         public void stealHeart(Player player) throws IOException {
-            setMaxHearts(player, getMaxHearts(player) - 2);
+            double hearts = getMaxHearts(player);
+            setMaxHearts(player, (hearts - 2));
         }
 
     /**
@@ -23,17 +25,16 @@ public class HeartManager {
      * @param player target
      */
     public void addHeart(Player player) throws IOException {
-            setMaxHearts(player, getMaxHearts(player) + 2);
+        double hearts = getMaxHearts(player);
+            setMaxHearts(player, (hearts + 2));
         }
     /**
      * Gets the maximum amount of hearts from the data file of a particular player
      * @param player target
      * @return the maximum amount of hearts
      */
-    public int getMaxHearts(Player player){
-        FileManager fileManager = new FileManager();
-        FileConfiguration dataFileConfig = fileManager.getDataFileConfig();
-        int maxHearts = dataFileConfig.getInt("hearts." + player.getUniqueId().toString());
+    public double getMaxHearts(Player player){
+        double maxHearts = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
         return maxHearts;
     }
 
@@ -43,7 +44,7 @@ public class HeartManager {
      * @param upperBound maximum number of hearts
      * @return boolean - success or failure
      */
-    public boolean saveMaxHearts(UUID uuid, int upperBound) throws IOException {
+    public boolean saveMaxHearts(UUID uuid, double upperBound) throws IOException {
         FileManager fileManager = new FileManager();
         FileConfiguration dataFileConfig = fileManager.getDataFileConfig();
         dataFileConfig.set("hearts." + uuid.toString(), upperBound);
@@ -55,9 +56,9 @@ public class HeartManager {
      * permanently updates the maximum hearts a particular player can have.
      * @param player target
      */
-    public void setMaxHearts(Player player, int heartsScale) throws IOException {
-        if(heartsScale > 1){
-            player.setHealthScale(heartsScale);
+    public void setMaxHearts(Player player, double heartsScale) throws IOException {
+        if(heartsScale > 2){
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(heartsScale);
         }
         UUID playerId = player.getUniqueId();
         saveMaxHearts(playerId, heartsScale);
@@ -71,8 +72,7 @@ public class HeartManager {
     }
 
     public void revive(Player player) throws IOException {
-        player.setHealth(20);
-        player.setGameMode(GameMode.SURVIVAL);
         setMaxHearts(player, 20);
+        player.setGameMode(GameMode.SURVIVAL);
     }
 }
